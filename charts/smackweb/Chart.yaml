@@ -1,0 +1,7 @@
+name: smackweb
+home: https://github.com/bucksteamy/smackapi
+version: 1.1
+description: Simple web app for demonstrating Kubernetes borrowed from Brian Redmond aka chzbrgr71
+maintainers: 
+  - name: chzbrgr71
+    email: brianisrunning@gmail.com

@@ -1,0 +1,8 @@
+# Default values for chart
+
+web:
+  deployment: smackweb-prod
+  versionLabel: prod
+  replicas: 3
+  image: "njeregistry.azurecr.io/bucksteamy/smackweb"
+  imageTag: "master-62ddb4f"

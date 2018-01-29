@@ -1,0 +1,38 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: "{{.Values.web.deployment}}"
+spec:
+  replicas: {{ default 3 .Values.web.replicas }}
+  template:
+    metadata:
+      labels:
+        app: smackweb
+        version: "{{.Values.web.versionLabel}}"
+    spec:
+      containers:
+      - name: smackweb
+        image: "{{.Values.web.image}}:{{.Values.web.imageTag}}"
+        env:
+        - name: API_SERVICE
+          value: "smackapi.draftdemo.svc.cluster.local"
+        - name: API_PORT
+          value: "8081"
+        - name: KUBE_NODE_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: spec.nodeName
+        - name: KUBE_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        - name: KUBE_POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        resources:
+          requests:
+            cpu: "100m"
+        imagePullPolicy: IfNotPresent #Always
+        ports:
+        - containerPort: 8080
